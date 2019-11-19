@@ -66,7 +66,7 @@ def traitementMatriceA(keyP1, dicRealP1, dicCodeRow, dicResult):
 		ligne       = ligne+str(codeProd[0])+","       
 	fileOutput.write(ligne[0:-1]+'\n')
 	#corps de la matrice
-	keyCodeRow        = list(dicCodeRow.keys())    
+	keyCodeRow        = list(dicCodeRow.keys())
 	keyCodeRow.sort()     
 	for ligne in keyCodeRow:
 		#codeProduit = ligne.replace('CPA_','')
@@ -79,7 +79,7 @@ def traitementMatriceA(keyP1, dicRealP1, dicCodeRow, dicResult):
 			for c in range(0,len(dicRealP1[keyP1])):
 				colLst    = dicRealP1[keyP1][c].split('#')#colLst[0] = code produit au niveau de la colonne
 				keyResult = ligne+colLst[0]
-				if  dicResult.has_key(keyResult):
+				if  keyResult in dicResult:
 					valueSiot    = float(dicResult[keyResult])*100
 					ligneOuput   = ligneOuput + str(valueSiot) +","
 				else:
@@ -110,7 +110,7 @@ def traitementMatrice(dicRealP1, dicMatrice, dicNoProduct, nbrRow, nbrCol):
 			productP1    = productLst[0]
 			valueP1      = float(productLst[1])
 			keyMatriceP1 = keyP1 + '#' + productP1                       
-			if  list(dicRealP1.keys())                
+			if keyMatriceP1 in dicNoProduct:
 				continue
 			else:
 				try:# la ligne de la matrice est dans P1
@@ -129,7 +129,7 @@ def traitementMatrice(dicRealP1, dicMatrice, dicNoProduct, nbrRow, nbrCol):
 					else:
 						value           = float(ligneMatrice[1])                    
 					keyNoProduct        = keyP1 + "#" + product               
-					if  keyMatriceP1 in dicNoProduct:
+					if  keyNoProduct in dicNoProduct:
 						continue
 					# on calcul la matrice A qui est celle des coeficient technique
 					else:
@@ -204,8 +204,8 @@ def traitementFichierCSV():
 						valeur		= 0
 					keyProd       = row
 					value         = col + '#' +str(valeur) #couple colonne, valeur
-					if  keyGeoYY in dicMatriceP1Row:
-						if  keyProd in dicMatriceP1Row[keyGeoYY]:
+					if keyGeoYY in dicMatriceP1Row:
+						if keyProd in dicMatriceP1Row[keyGeoYY]:
 							dicMatriceP1Row[keyGeoYY][keyProd] = dicMatriceP1Row[keyGeoYY][keyProd] + [value]                              
 						else:                          
 							dicMatriceP1Row[keyGeoYY][keyProd] = [value]

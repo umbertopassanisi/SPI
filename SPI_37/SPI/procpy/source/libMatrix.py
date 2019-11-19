@@ -14,13 +14,13 @@ def vectorCol(colP1,colP6):
 	dicProdP1		= {}
 	dicProdP6		= {}
 	lineProd		= ''
-	for c in (range(0,len(colP1))):
+	for c in (list(range(0,len(colP1)))):
 		prod				= colP1[c].split('#')
 		dicProdP1[prod[0]]	= '0'
-	for c in (range(0,len(colP6))):
+	for c in (list(range(0,len(colP6)))):
 		prod				= colP6[c].split('#')
 		dicProdP6[prod[0]]	= prod[1]
-	codeP1        = dicProdP1.keys()    
+	codeP1        = list(dicProdP1.keys())
 	codeP1.sort()
 	for keyP1 in codeP1: 
 		try:
@@ -35,7 +35,7 @@ def vectorSetCol(currentLst,setLstCol):
 	lstColValue      = currentLst
 	if  (len(setLstCol)>len(currentLst)):   
 		lstColInput      = []
-		for c in (range(0,len(lstColValue))):
+		for c in (list(range(0,len(lstColValue)))):
 			lineProd     = lstColValue[c].split('#')
 			lstColInput  = lstColInput + [lineProd[0]]
 		setColInput      =  set(lstColInput)
@@ -59,14 +59,14 @@ def addP1(cleMatriceP1, currentValue, oldValue):
 		try:
 			xf		= float(x[1])
 		except:
-			print 'no num',cleMatriceP1,x[1]
+			print('no num',cleMatriceP1,x[1])
 			xf		= 0
 		Y			= lstProdY[p]
 		y			= Y.split('#')
 		try:
 			yf		= float(y[1])
 		except:
-			print 'no num',cleMatriceP1,x[1]
+			print('no num',cleMatriceP1,x[1])
 			yf		= 0
 		produitY	= y[0]
 		if  (produitX != produitY):
@@ -85,7 +85,7 @@ def addP1(cleMatriceP1, currentValue, oldValue):
 def fonctionVectorZero(vectorP1):
 	vectorInput  = vectorP1    
 	vectorOutput = []
-	for c in (range(0,len(vectorInput))):
+	for c in (list(range(0,len(vectorInput)))):
 		productLst   = vectorInput[c].split('#')
 		productOuput = productLst[0] + '#0'
 		vectorOutput = vectorOutput + [productOuput]
@@ -100,12 +100,12 @@ def vectorAtraiter(vectorMatrice, vectorP1):
 	vectorOutput = []
 	lstProdP1    = []
 	lstProdMat   = []    
-	for c in (range(0,len(vectorP1))):
+	for c in (list(range(0,len(vectorP1)))):
 		productLst   = vectorP1[c].split('#')
 		productP1    = productLst[0]
 		lstProdP1    = lstProdP1 + [productP1]
 		#lstProdMat   = []        
-		for p in (range(0,len(vectorMatrice))):            
+		for p in (list(range(0,len(vectorMatrice)))):
 			pLst             = vectorMatrice[p].split('#')
 			productMatrix    = pLst[0]
 			if  productMatrix == productP1:

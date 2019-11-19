@@ -159,7 +159,7 @@ def defUselessCode(dicCode, fileLog):
 		fileLog.write('The code ' + code + ' is available in the input but has not been processed.\n')
     
 def	defDicNaceCheck(dicNaceCheck,dicNace,fileLog):
-	naceTableDbSort =   list(dicNace.keys())
+	naceTableDbSort =   list(list(dicNace.keys()))
 	naceTableDbSort.sort()
 	for naceTableDb	in naceTableDbSort:
 		try:
@@ -658,7 +658,7 @@ def	addValueMissingNace(dicIndicator, dicNace, minStartYear):
 	countrySort		=	list(dicIndicator.keys())
 	countrySort.sort()
 	for country in countrySort:
-		naceKeySort	=	list(dicNace.keys())
+		naceKeySort	=	list(list(dicNace.keys()))
 		naceKeySort.sort()
 		#on balaie la liste des nace pour savoir s'il en manque dans le dic des indicateurs
 		for nace	in naceKeySort:

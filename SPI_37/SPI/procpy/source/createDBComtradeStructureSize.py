@@ -90,7 +90,7 @@ def traitementFichierTXT(indicatorInput,indicatorInputEurostat,nomenclature,comp
 				country	  =	dicNation[geoEuroStat]					
 				timeSerie =	geoTime[1:]
 				#print indicator,indicatorEurostat,indicatorInput,size,nomenclature,nace
-				if	(indicator == indicatorEurostat and (G_LstSize.count(size))) and ((nomenclature == 'nace1' and nace in dicNace or (nomenclature == 'nace2' and len(nace) < 4):
+				if	(indicator == indicatorEurostat and (G_LstSize.count(size))) and ((nomenclature == 'nace1' and nace in dicNace) or (nomenclature == 'nace2' and len(nace) < 4)):
 					dicSize[size] =	size	#pour connaitre les size de eurostat
 					try: #on cherche l'indicateur SPI correspondant
 						indicator_size	=	indicatorSpi +'_'+ G_DicSize[size]

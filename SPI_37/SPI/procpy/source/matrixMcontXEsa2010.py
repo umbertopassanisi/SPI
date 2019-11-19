@@ -148,7 +148,7 @@ def traitementMatriceA(keyP1, matriceA, dicRealP1, mVector):
 	#ligne = str(mContXPercent)
                         
 def traitementMatrice(dicRealP1, dicMatrice, dicNoProduct):
-	codeP1        = dicRealP1.keys()    
+	codeP1        = list(dicRealP1.keys())
 	codeP1.sort()
 	mVector       = []
 	for keyP1 in codeP1: #key = country,year
@@ -160,14 +160,14 @@ def traitementMatrice(dicRealP1, dicMatrice, dicNoProduct):
 		dicRealP1[keyP1]['P2I'].sort()
 		vectorP1      = dicRealP1[keyP1]['P1']
 		vectorZero    = libMatrix.fonctionVectorZero(vectorP1)
-		mVector       = map(libMatrix.divide, dicRealP1[keyP1]['P2I'], dicRealP1[keyP1]['P1'])   
+		mVector       = list(map(libMatrix.divide, dicRealP1[keyP1]['P2I'], dicRealP1[keyP1]['P1']))
 		for productLst  in dicRealP1[keyP1]['P1']:#chaque ligne est une liste avec le code produit et la valeur 
 			productLst   = productLst.split('#')
 			productP1    = productLst[0]
 			valueP1      = float(productLst[1])
 			keyMatriceP1 = keyP1 + '#' + productP1
 			ligne        = 0
-			if  dicNoProduct.has_key(keyMatriceP1):
+			if dicNoProduct.has_key(keyMatriceP1):
 				fileLog.write('produit non traite keyMatriceP1='+keyMatriceP1+'\n')                            
 				continue
 			else:
@@ -186,8 +186,8 @@ def traitementMatrice(dicRealP1, dicMatrice, dicNoProduct):
 					ligneMatrice        = ligneMatrice.split('#')
 					product             = ligneMatrice[0]                
 					value               = float(ligneMatrice[1])
-					keyNoProduct        = keyP1 + "#" + product               
-					if  dicNoProduct.has_key(keyNoProduct):
+					keyNoProduct        = keyP1 + "#" + product
+					if keyNoProduct in dicNoProduct:
 						#fileLog.write('produit non traite keyMatriceP1='+keyMatriceP1+' keyNoProduct='+keyNoProduct+'\n')
 						continue
 					# on calcul la matrice A qui est celle des coeficient technique
@@ -220,15 +220,15 @@ def readFileP2I(dicMatriceP1Row,dicNace):
 		geoTime			= re.sub(r'[a-z]', '', geoTime)
 		geoTime			= re.sub(r'[:]', '0', geoTime)
 		ligneGeoTime    = geoTime.strip('\n').split('\t')		
-		geo             = ligneGeoTime[0].strip()   
-		if	(flow == 'IMP' and unit == 'MIO_EUR' and row == 'TOTAL' and dicNace.has_key(col)):
+		geo             = ligneGeoTime[0].strip()
+		if (flow == 'IMP' and unit == 'MIO_EUR' and row == 'TOTAL' and col in dicNace):
 			for i in  range(1,len(recGeoTime)): #record des metas, on boucle sur les annees
 				yy            = recGeoTime[i].strip() #record des metas
 				keyGeoYY      = geo + '#' + yy
 				value         = col + '#' + ligneGeoTime[i].strip()
 				keyProd       = 'P2I'
-				if  dicMatriceP1Row.has_key(keyGeoYY):
-					if  dicMatriceP1Row[keyGeoYY].has_key(keyProd):
+				if keyGeoYY in dicMatriceP1Row:
+					if keyProd in dicMatriceP1Row[keyGeoYY]:
 						dicMatriceP1Row[keyGeoYY][keyProd] = dicMatriceP1Row[keyGeoYY][keyProd] + [value]                              
 					else:                          
 						dicMatriceP1Row[keyGeoYY][keyProd] = [value]
@@ -268,23 +268,23 @@ def traitementFichierCSV():
 		dicGeo[geo]     = geo        
 		if  (flow == 'DOM' and unit == 'MIO_EUR'):
 			#on  met chaque ligne de produits dans un dictionnnaire
-			if	dicNace.has_key(col) and dicNace.has_key(row): #pas prendre cpa_total
+			if	col in dicNace and row in dicNace: #pas prendre cpa_total
 				for i in  range(1,len(recGeoTime)): #record des metas, on boucle sur les annees
 					yy            = recGeoTime[i].strip() #record des metas 
 					keyMatrice    = geo + '#' + yy + '#' + col
 					value         = row + '#' + ligneGeoTime[i].strip()
-					if  dicMatrice.has_key(keyMatrice): # ATTENTION CHAQUE LIGNE CORRESPOND AUX ELEMENTS D'UNE COLONNE
+					if keyMatrice in dicMatrice:  # ATTENTION CHAQUE LIGNE CORRESPOND AUX ELEMENTS D'UNE COLONNE
 						dicMatrice[keyMatrice]  = dicMatrice[keyMatrice] + [value]
 					else:
 						dicMatrice[keyMatrice]  = [value]
-			if  (row == 'P1')and(dicNace.has_key(col)):                
+			if (row == 'P1') and (col in dicNace):
 				for i in  range(1,len(recGeoTime)): #record des metas, on boucle sur les annees
 					yy            = recGeoTime[i].strip() #record des metas
 					keyGeoYY      = geo + '#' + yy                    
 					value         = col + '#' + ligneGeoTime[i].strip()
 					keyProd       = row
-					if  dicMatriceP1Row.has_key(keyGeoYY):
-						if  dicMatriceP1Row[keyGeoYY].has_key(keyProd):
+					if keyGeoYY in dicMatriceP1Row:
+						if keyProd in dicMatriceP1Row[keyGeoYY]:
 							dicMatriceP1Row[keyGeoYY][keyProd] = dicMatriceP1Row[keyGeoYY][keyProd] + [value]                              
 						else:                          
 							dicMatriceP1Row[keyGeoYY][keyProd] = [value]
@@ -292,14 +292,14 @@ def traitementFichierCSV():
 						dicMatriceP1Row[keyGeoYY] = {} #on cree un nouveau dictionnaire pour le couple valeur, produit par ligne de produit
 						dicMatriceP1Row[keyGeoYY][keyProd] = [value]
 			#pour le vecteur P6 des exportations
-			if  (col == 'P6') and (dicNace.has_key(row)): #pas prendre cpa_total                                                                 
+			if (col == 'P6') and (row in dicNace):  # pas prendre cpa_total
 				for i in  range(1,len(recGeoTime)): #record des metas, on boucle sur les annees
 					yy            = recGeoTime[i].strip() #record des metas
 					keyGeoYY      = geo + '#' + yy
 					value         = row + '#' + ligneGeoTime[i].strip()
 					keyProd       = col
-					if  dicMatriceP1Row.has_key(keyGeoYY):
-						if  dicMatriceP1Row[keyGeoYY].has_key(keyProd):
+					if keyGeoYY in dicMatriceP1Row:
+						if keyProd in dicMatriceP1Row[keyGeoYY]:
 							dicMatriceP1Row[keyGeoYY][keyProd] = dicMatriceP1Row[keyGeoYY][keyProd] + [value]                              
 						else:                          
 							dicMatriceP1Row[keyGeoYY][keyProd] = [value]
@@ -310,7 +310,7 @@ def traitementFichierCSV():
 	fichierInput.close()
 	#on complete le dictionnaire P1 avec la partie P2I qui vient des IMPORTATIONS    
 	dicMatriceP1Row = readFileP2I(dicMatriceP1Row,dicNace)
-	dicKeyP1Row     = dicMatriceP1Row.keys()
+	dicKeyP1Row     = list(dicMatriceP1Row.keys())
 	dicKeyP1Row.sort() 
 	#SELECTION DES MATRICES A TRAITER                                         
 	for keyP1 in dicKeyP1Row: #key = country,year

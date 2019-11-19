@@ -18,7 +18,7 @@ def createTable(nomenclature,dicIndicator,fileLog,minStartYear,dicNace,indicator
 	dicIndicator 			=	spiLib.addValueMissing(dicIndicator, lstTotal, minStartYear)
 	startYear				=	minStartYear
 	dicTotalNace			=	{}
-	countrySort     		=   list(dicIndicator.keys())
+	countrySort     		=   list(list(list(dicIndicator.keys())))
 	countrySort.sort()	
 	for country in countrySort:
 		dicTotalNace[country]	=	{}
@@ -80,7 +80,7 @@ def defDicTotalNace(dicTotalNace,indicatorSpi,startYear,nomenclature,tableName):
 #createTable avec en retour le dictionnaire des agregats(dicTotalNace) que l'on passe en parametre				
 def createTableTotal(nomenclature,dicTotalNace,dicIndicator,minStartYear,fileLog,dicNace,indicatorSpi,compteEurostat,tableName):
 	startYear						=	minStartYear
-	countrySort     				=   list(dicIndicator.keys())
+	countrySort     				=   list(list(dicIndicator.keys()))
 	countrySort.sort()
 	for country in countrySort:
 		totalCountryExist			=	1
@@ -335,7 +335,7 @@ def createTableNE(nomenclature='',dicNation='',endYear='',fileLog='',indicatorSp
 	countrySort.sort()	
 	keyTotal					=	indicatorSpi + '_TOTAL'
 	for country in countrySort:
-		naceSort    			=   dicNaceNE.keys()
+		naceSort    			=   list(dicNaceNE.keys())
 		naceSort.sort()
 		for nace in naceSort:
 			try:#dans le cas des indicateurs avec une size
