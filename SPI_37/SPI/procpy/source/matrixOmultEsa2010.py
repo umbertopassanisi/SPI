@@ -9,8 +9,8 @@ import  glob
 import  re
 from    numpy import *
 from    numpy.linalg import inv
-import  libMatrix
-import	FileAccessMatrix
+from . import  libMatrix
+from . import	FileAccessMatrix
 
 dirWork         =  sys.argv[1]
 IndOrPrd        =  sys.argv[2] #P or I

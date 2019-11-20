@@ -1,13 +1,12 @@
 import sys
 import glob
 import re
-import exceptions
-import DBConnect
-import DBAccess
-import spiLib
-import spiLibTotal
-import spiLibCreateTable
-import pprint
+
+from . import DBConnect
+from . import DBAccess
+from . import spiLib
+from . import spiLibTotal
+from . import spiLibCreateTable
 
 #parametre NACE1 ou NACE2
 G_nomenclature = sys.argv[1].lower()
@@ -77,8 +76,8 @@ def traitementFichierTXT(indicatorEurostat, unitEurostat, nomenclature, cpa, fil
                 dicNaceCheck[nace] = nace
                 country = dicNation[geo]                    
                 timeSerie = geoTime[1:]
-                
-                if indicator == indicatorEurostat and dicNace.has_key(nace) and unit == unitEurostat:
+
+                if indicator == indicatorEurostat and nace in dicNace and unit == unitEurostat:
                     vector = spiLib.defVectorYears(timeSerie, startYear, endYear)
                     minimumYearWithActualData = spiLib.findMinimumYearWithActualData(timeSerie,int(startYear),minimumYearWithActualData)
                     refDicGO = spiLib.defDicIndicator(country,nace,vector,refDicGO)

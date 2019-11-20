@@ -1,10 +1,10 @@
 import sys
 from pprint import pprint
 
-import DBConnect
-import DBAccess
-import spiLib
-import spiLibCreateTable
+from . import DBConnect
+from . import DBAccess
+from . import spiLib
+from . import spiLibCreateTable
 
 nomenclature = sys.argv[1]
 path = sys.argv[2]
@@ -30,13 +30,13 @@ def traitementFichierTXT(nomenclature):
         
     refVec = dicNumeratorA
     while type(refVec) is not list:
-        refVec = refVec[refVec.keys()[0]]
+        refVec = refVec[list(refVec.keys())[0]]
     
     endDefinitive = startNumeratorA + len(refVec) - 1
     
     refVec = dicNumeratorB
     while type(refVec) is not list:
-        refVec = refVec[refVec.keys()[0]]
+        refVec = refVec[list(refVec.keys())[0]]
     
     endNumeratorB = startNumeratorB + len(refVec) - 1
     
@@ -45,7 +45,7 @@ def traitementFichierTXT(nomenclature):
     
     refVec = dicDenominator
     while type(refVec) is not list:
-        refVec = refVec[refVec.keys()[0]]
+        refVec = refVec[list(refVec.keys())[0]]
     
     endDenominator = startDenominator + len(refVec) - 1
     
@@ -57,8 +57,8 @@ def traitementFichierTXT(nomenclature):
     dicDenominator = spiLib.normalizeDicSize(dicDenominator, startDenominator, startDefinitive, endDefinitive) 
     
     dicNumerator = {}
-    
-    for country, countryData in dicNumeratorA.items() :
+
+    for country, countryData in list(dicNumeratorA.items()):
         dicNumerator[country] = {}
         
         for code in countryData :

@@ -1,10 +1,10 @@
 import sys
 from pprint import pprint
 
-import DBConnect
-import DBAccess
-import spiLib
-import spiLibCreateTable
+from . import DBConnect
+from . import DBAccess
+from . import spiLib
+from . import spiLibCreateTable
 
 nomenclature = sys.argv[1]
 indicator = sys.argv[2]
@@ -38,13 +38,13 @@ def traitementFichierTXT(nomenclature, indicator, indicNumerator, indicDenominat
     
     refVec = dicNumerator  
     while type(refVec) is not list:
-        refVec = refVec[refVec.keys()[0]]
+        refVec = refVec[list(refVec.keys())[0]]
     
     endNumerator = startNumerator + len(refVec) - 1
     
     refVec = dicDenominator
     while type(refVec) is not list:
-        refVec = refVec[refVec.keys()[0]]
+        refVec = refVec[list(refVec.keys())[0]]
     
     endDenominator = startDenominator + len(refVec) - 1
     

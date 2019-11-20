@@ -1,8 +1,8 @@
 #this file is only used for the nace2 nomenclature but could be extended to other nomenclature if needed 
 import sys
-import DBConnect
-import DBAccess
-import spiLibCreateTable
+from . import DBConnect
+from . import DBAccess
+from . import spiLibCreateTable
 from pprint import pprint
 
 indicator = sys.argv[1]

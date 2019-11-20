@@ -1,7 +1,7 @@
 from decimal import *
 import re
-import DBAccess
-import DBConnect
+from . import DBAccess
+from . import DBConnect
 
 #
 # startIndice = longueur la plus grande rencontree pour un vecteur

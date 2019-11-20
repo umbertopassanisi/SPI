@@ -2,10 +2,10 @@ import sys
 import glob
 import re
 import cx_Oracle
-import DBConnect
-import DBAccess
-import spiLib
-import spiLibCreateTable
+from . import DBConnect
+from . import DBAccess
+from . import spiLib
+from . import spiLibCreateTable
 from pprint import pprint
 
 #parametre NACE1 ou NACE2
