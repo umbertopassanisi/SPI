@@ -43,11 +43,11 @@ def traitementFichierTXT(nomenclature, cpa, fileLog, tableName):
     refVec = refDicX
     vectorCheck = 1
     while type(refVec) is not list:
-        refVec = refVec[refVec.keys()[vectorCheck]]
+        refVec = refVec[list(refVec.keys())[vectorCheck]]
         if type(refVec) is list:
             while len(refVec) == 1:
                 vectorCheck += 1
-                refVec = refVec[refVec.keys()[vectorCheck]]
+                refVec = refVec[list(refVec.keys())[vectorCheck]]
 
     refDicVa = spiLib.normalizeDicSize(refDicVa, startYearVa, startYearX, startYearX + len(refVec) - 1)
     refDicM = spiLib.normalizeDicSize(refDicM, startYearM, startYearX, startYearX + len(refVec) - 1)
