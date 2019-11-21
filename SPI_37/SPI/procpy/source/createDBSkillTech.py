@@ -79,7 +79,7 @@ def traitementFichierTXT(indicatorInputEurostat, unitEurostat, nomenclature, sbs
                 country = dicNation[geoEuroStat]                    
                 timeSerie = geoTime[1:]
 
-                if indicator == indicatorEurostat and dicNace.has_key(nace) and unit == unitEurostat:
+                if indicator == indicatorEurostat and nace in dicNace and unit == unitEurostat:
                     dicNaceCheck[nace] = nace
                     vector = spiLib.defVectorYears(timeSerie, startYear, endYear)
                     dicStartValue = spiLib.defDicStartValue(timeSerie,country,nace,indicator,dicStartValue, endYear)

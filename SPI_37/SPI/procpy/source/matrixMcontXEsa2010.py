@@ -8,8 +8,6 @@
 # flag (stk_flow) = DOM (cp18)
 # flag (stk_flow) = IMP (cp19)
 
-import  sys
-import  glob
 import  re
 from    numpy import *
 from    numpy.linalg import inv
@@ -67,7 +65,7 @@ def traitementMatriceA(keyP1, matriceA, dicRealP1, mVector):
 	colP6           = dicRealP1[keyP1]['P6']
 	#la fonction fait un vecteur avec TOUTES les colonnes 
 	#MAIS on ne CONSERVE QUE LES VALEURS DE P6 (exportation)     
-	colExport       = libMatrix.vectorCol(colP1,colP6) 
+	colExport       = libMatrix.vectorCol(colP1, colP6)
 	xVector         = libMatrix.createExportVector(colExport)
 	fileDetail      = open(dirOutput + '\\matrixMContXDetail_' + str(keyP1) +IndOrPrd+'.csv', 'w')    
 	try:
@@ -249,7 +247,7 @@ def traitementFichierCSV():
 	dicNoProduct      = {}
 	dicNace		      = {}
 	#dicNace		  =	DBAccess.dicNace('nace2','NAMA','0')
-	dicNace			  =	FileAccessMatrix.dicNace(fileNaceInput,dirTXT)	
+	dicNace			  =	FileAccessMatrix.dicNace(fileNaceInput, dirTXT)
 	fichierInput      = open(fichierCSV,'r')
 	rec1er            = fichierInput.readline() #1er rec avec les meta
 	recMeta           = rec1er.split(',')

@@ -3,11 +3,11 @@ import glob
 import re
 import exceptions
 import pprint
-from . import DBConnect
-from . import DBAccess
-from . import FileAccess
-from . import spiLib
-from . import spiLibCreateTable
+import DBConnect
+import DBAccess
+import FileAccess
+import spiLib
+import spiLibCreateTable
 
 #parametre NACE1 ou NACE2
 NaceInput      	=  sys.argv[1]

@@ -6,11 +6,8 @@
  afin d'y ajouter les caracteres manquants dans les codes agregats
  flag (stk_flow) = TOTAL
 '''
-import  sys
-import  glob
 import  re
 from    numpy import *
-from    numpy.linalg import inv
 from . import  libMatrix
 from . import	FileAccessMatrix
 
@@ -48,7 +45,7 @@ else:
 def traitementMatriceA(keyP1, dicRealP1, dicCodeRow, dicResult):
 	#Resultat 
 	dicNaceRow		= {}
-	dicNaceRow		= FileAccessMatrix.dicNace(fileNaceRow,dirTXT)	
+	dicNaceRow		= FileAccessMatrix.dicNace(fileNaceRow, dirTXT)
 	lstKeyP1          = keyP1.split("#")
 	codeCountry       = lstKeyP1[0]
 	yyyy              = lstKeyP1[1]    
@@ -154,7 +151,7 @@ def traitementFichierCSV():
 	dicNoProduct      = {}
 	dicNace		      = {}
 	#dicNace		  =	DBAccess.dicNace('nace2','NAMA','0')
-	dicNace			  =	FileAccessMatrix.dicNace(fileNaceInput,dirTXT)
+	dicNace			  =	FileAccessMatrix.dicNace(fileNaceInput, dirTXT)
 	fichierInput      = open(fichierCSV,'r')
 	rec1er            = fichierInput.readline() #1er rec avec les meta
 	recMeta           = rec1er.split(',')
@@ -233,7 +230,7 @@ def traitementFichierCSV():
 		dicP1[cleMatriceP1]=['']
 		for cleProd  in dicMatriceP1Row[cleMatriceP1]:#on balaye les produits par ligne : B1G,D21_M_D31,CPA_TOTAL                 
 			currentLst        = dicMatriceP1Row[cleMatriceP1][cleProd]
-			currentValue      = libMatrix.vectorSetCol(currentLst,setLstCol) #la fonction fait un vecteur avec TOUTES les colonnes
+			currentValue      = libMatrix.vectorSetCol(currentLst, setLstCol) #la fonction fait un vecteur avec TOUTES les colonnes
 			currentProd       = cleProd 
 			if  (oldValue != ''): #on fait le test pour le 1er record
 				lstValue  = libMatrix.addP1(cleMatriceP1, currentValue, oldValue)

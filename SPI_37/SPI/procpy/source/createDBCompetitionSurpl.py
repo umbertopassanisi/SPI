@@ -3,11 +3,11 @@ import csv
 import re
 from glob import glob
 from pprint import pprint
-from . import spiLib
-from . import spiLibTotal
-from . import spiLibCreateTable
-from . import DBConnect
-from . import DBAccess
+import spiLib
+import spiLibTotal
+import spiLibCreateTable
+import DBConnect
+import DBAccess
 
 nomenclature = sys.argv[1]
 path = sys.argv[2]

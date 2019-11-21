@@ -44,7 +44,7 @@ def traitementFichierTXT(nomenclature, indicatorDestor, indicatorWorld, indicato
     if startYearWorld != startYearDestor:
         worldVec = refDicDestor
         while type(worldVec) is not list:
-            worldVec = worldVec[worldVec.keys()[0]]
+            worldVec = worldVec[list(worldVec.keys())[0]]
         refDicWorld = spiLib.normalizeDicSize(refDicWorld, startYearWorld, startYearDestor, startYearDestor + len(worldVec) - 1)
         
     spiLibCreateTable.createTableExternalGeoShare(nomenclature, refDicWorld, refDicDestor, indicatorSpi, startYearDestor, fileLog, tableName)

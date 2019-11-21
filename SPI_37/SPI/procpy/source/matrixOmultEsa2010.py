@@ -4,8 +4,6 @@
 # input : naio_10_cp1700.tsv (siot)
 # input : naio_10_cp1750.tsv pour industry (NL et FI)
 # flag (stk_flow) = DOM
-import  sys
-import  glob
 import  re
 from    numpy import *
 from    numpy.linalg import inv
@@ -156,7 +154,7 @@ def traitementFichierCSV():
 	dicNoProduct      = {}
 	dicNace		      = {}
 	#dicNace		  =	DBAccess.dicNace('nace2','NAMA','0')
-	dicNace			  =	FileAccessMatrix.dicNace(fileNaceInput,dirTXT)	
+	dicNace			  =	FileAccessMatrix.dicNace(fileNaceInput, dirTXT)
 	fichierInput      = open(fichierCSV,'r')
 	rec1er            = fichierInput.readline() #1er rec avec les meta
 	recMeta           = rec1er.split(',')

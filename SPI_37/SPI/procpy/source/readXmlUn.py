@@ -54,20 +54,20 @@ def traitementXML(fichiersXml,G_typeProduit,fileOutput):
 		#print country
 		paystraiter		=	0
 		for	rgCode		in 	dicXml:
-			codeCPASort	=   dicXml[rgCode].keys()
+			codeCPASort	=   list(dicXml[rgCode].keys())
 			codeCPASort.sort()
 			for	codeCPA	in	codeCPASort:
-				codeHSSort		=   dicXml[rgCode][codeCPA].keys()
+				codeHSSort		=  list(dicXml[rgCode][codeCPA].keys())
 				codeHSSort.sort()
 				dicTotalYearHS	=	{}
 				minStartYearHS  = 99999
 				maxEndYearHS    = -1				
-				if	dicWorld.has_key(codeCPA): 
+				if	codeCPA in dicWorld:
 					pass #on continue a l'instruction suivante
 				else: 
 					dicWorld[codeCPA] = {}
 				for	codeHS	in	codeHSSort:
-					yearSort    =   dicXml[rgCode][codeCPA][codeHS].keys()
+					yearSort    =   list(dicXml[rgCode][codeCPA][codeHS].keys())
 					yearSort.sort()	
 					startYear		=	yearSort[0]
 					endYear			=	yearSort[-1]
@@ -116,16 +116,16 @@ def traitementXML(fichiersXml,G_typeProduit,fileOutput):
 			recordOut= 'unprocessed country :'+country+'\n'
 			fileLog.write(recordOut)
 
-	countryNoValueSort	=   dicCountryNoValue.keys()
+	countryNoValueSort	=   list(dicCountryNoValue.keys())
 	countryNoValueSort.sort()
 	for countryNoValue in countryNoValueSort:
 		recordOut= 'no value for country, cpa, year :'+countryNoValue+'\n'
 		fileLog.write(recordOut)
 	#traitement world
-	codeCPASort	=   dicWorld.keys()
+	codeCPASort	=   list(dicWorld.keys())
 	codeCPASort.sort()
 	for	codeCPA	in	codeCPASort:
-		keyYear			=	dicWorld[codeCPA].keys()
+		keyYear			= list(dicWorld[codeCPA].keys())
 		keyYear.sort()
 		startYear		=	keyYear[0]
 		endYear			=	keyYear[-1]		

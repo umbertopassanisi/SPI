@@ -1,11 +1,8 @@
 import sys
 import glob
-import re
-import exceptions
 from . import DBConnect
 from . import DBAccess
 from . import spiLib
-from . import spiLibTotal
 from . import spiLibCreateTable
 
 #parametre NACE1 ou NACE2
@@ -53,7 +50,7 @@ def traitementFichierTXT(indicatorInput,indicatorInputEurostat,nomenclature,comp
 	indicatorSpi		= indicatorInput	
 	indicatorSpiTotal	= G_IndicatorSPI_T
 	indicatorEurostat	= indicatorInputEurostat	
-	dicNace				= spiLib.defSelectdicNace(nomenclature,compteEurostat)
+	dicNace				= spiLib.defSelectdicNace(nomenclature, compteEurostat)
 	dicNation			= DBAccess.lectureNationEurostat(dicNation)
 	dicStartValue		= dict(startIndice=1,startCountry='',startNace='',startIndicator='',startValeur=0,startYear=1900)
 	minStartYear        = 99999
@@ -89,26 +86,26 @@ def traitementFichierTXT(indicatorInput,indicatorInputEurostat,nomenclature,comp
 					(nomenclature == 'nace2' and len(nace) < 4)):				
 					dicNaceCheck[nace]	=	nace #on remplit le dic pour faire un check si autant de nace que dans la table SPI											
 					vector 			= 	spiLib.defVectorYears(timeSerie, startYear, endYear)#traitement de la serie Eurostat
-					dicStartValue	=	spiLib.defDicStartValue(timeSerie,country,nace,indicator,dicStartValue,endYear)
-					dicIndicator	=	spiLib.defDicIndicator(country,nace,vector,dicIndicator)
-					minStartYear,maxEndYear = spiLib.defMinMaxYear(startYear,minStartYear,endYear,maxEndYear) 					
+					dicStartValue	=	spiLib.defDicStartValue(timeSerie, country, nace, indicator, dicStartValue, endYear)
+					dicIndicator	=	spiLib.defDicIndicator(country, nace, vector, dicIndicator)
+					minStartYear,maxEndYear = spiLib.defMinMaxYear(startYear, minStartYear, endYear, maxEndYear)
 			except:
 				dicNoCountry[geoEuroStat]	=	geoEuroStat	
 	
 	fileLog.write('highIndice '+str(dicStartValue['startIndice'])+' highCountry '+dicStartValue['startCountry']+\
 	' Indicator '+dicStartValue['startIndicator']+' Nace '+dicStartValue['startNace']+\
 	' valeur '+str(dicStartValue['startValeur'])+' startYear '+str(dicStartValue['startYear'])+'\n')
-	spiLib.defnoCountry(dicNoCountry,fileLog)
-	spiLib.defDicNaceCheck(dicNaceCheck,dicNace,fileLog)
+	spiLib.defnoCountry(dicNoCountry, fileLog)
+	spiLib.defDicNaceCheck(dicNaceCheck, dicNace, fileLog)
 	minStartYear = dicStartValue['startYear']
 	dicIndicator = spiLib.reverseAndNormalizeDicIndicator(dicIndicator, minStartYear, maxEndYear)
 	#creation indicateur SPI par ex vabus avec en retour le dic des agregats
-	dicAgregatNace = spiLibCreateTable.createTable(nomenclature,dicIndicator,fileLog,minStartYear,dicNace,indicatorSpi,compteEurostat,G_tableName)
+	dicAgregatNace = spiLibCreateTable.createTable(nomenclature, dicIndicator, fileLog, minStartYear, dicNace, indicatorSpi, compteEurostat, G_tableName)
 	if	indicatorSpiTotal != 'noTotal':	
 		#creation indicateur total SPI par ex vabussh
-		spiLibCreateTable.createTableTotal(nomenclature,dicAgregatNace,dicIndicator,minStartYear,fileLog,dicNace,indicatorSpiTotal,compteEurostat,G_tableName)
-		spiLibCreateTable.createTableNE(nomenclature,dicNation,endYear,fileLog,indicatorSpiTotal,compteEurostat,G_tableName)
-	spiLibCreateTable.createTableNE(nomenclature,dicNation,endYear,fileLog,indicatorSpi,compteEurostat,G_tableName)
+		spiLibCreateTable.createTableTotal(nomenclature, dicAgregatNace, dicIndicator, minStartYear, fileLog, dicNace, indicatorSpiTotal, compteEurostat, G_tableName)
+		spiLibCreateTable.createTableNE(nomenclature, dicNation, endYear, fileLog, indicatorSpiTotal, compteEurostat, G_tableName)
+	spiLibCreateTable.createTableNE(nomenclature, dicNation, endYear, fileLog, indicatorSpi, compteEurostat, G_tableName)
 	
 traitementFichierTXT(G_IndicatorInput,G_IndicatorEurostat,G_Nomenclature,G_compte)
 fileLog.close()

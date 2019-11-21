@@ -1,11 +1,12 @@
 import sys
 import glob
 import re
-from . import DBConnect
-from . import DBAccess
-from . import spiLib
-from . import spiLibTotal
+import DBConnect
+import DBAccess
+import spiLib
+import spiLibTotal
 from decimal import *
+from pprint import pprint
 
 #-------------------------------------------------------------------------------------------##
 #TRAITEMENT STRUCTURE  ET VAEMP

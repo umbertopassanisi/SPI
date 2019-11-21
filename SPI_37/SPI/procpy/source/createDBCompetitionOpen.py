@@ -2,11 +2,11 @@ import sys
 import glob
 import re
 
-from . import DBConnect
-from . import DBAccess
-from . import spiLib
-from . import spiLibTotal
-from . import spiLibCreateTable
+import DBConnect
+import DBAccess
+import spiLib
+import spiLibTotal
+import spiLibCreateTable
 
 
 #parametre NACE1 ou NACE2

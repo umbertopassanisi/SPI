@@ -4,8 +4,6 @@
 # input : naio_10_cp1750.tsv pour industry
 # flag (stk_flow) = DOM (cp18)
 # 		: nama_10_a64_e.tsv
-import	sys
-import	glob
 import	re
 from	numpy import *
 from	numpy.linalg import inv
@@ -108,7 +106,7 @@ def traitementMatrice(dicRealP1, dicMatrice, dicNoProduct):
 		'''
 		if  (len(colP1)!=len(colToBeP1)):
 			 fileLog.write('nbr product P1 ='+str(len(colP1))+' nbr product EMP ='+str(len(colToBeP1))+' for '+str(keyP1)+'\n')         
-		colEmp          = libMatrix.vectorCol(colP1,colToBeP1) #la fonction fait un vecteur avec TOUTES les colonnes
+		colEmp          = libMatrix.vectorCol(colP1, colToBeP1) #la fonction fait un vecteur avec TOUTES les colonnes
 		colP1.sort()
 		colEmp.sort()
 		vectorP1      = dicRealP1[keyP1]['P1']
@@ -212,7 +210,7 @@ def traitementFichierCSV():
 	dicNoProduct      = {}
 	dicNace		      = {}
 	#dicNace		  =	DBAccess.dicNace('nace2','NAMA','0')
-	dicNace			  =	FileAccessMatrix.dicNace(fileNaceInput,dirTXT)
+	dicNace			  =	FileAccessMatrix.dicNace(fileNaceInput, dirTXT)
 	fichierInput      = open(fichierCSV,'r')
 	rec1er            = fichierInput.readline() #1er rec avec les meta
 	recMeta           = rec1er.split(',')

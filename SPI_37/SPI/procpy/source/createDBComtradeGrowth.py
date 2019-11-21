@@ -3,10 +3,10 @@ import glob
 import re
 
 import cx_Oracle
-from . import DBConnect
-from . import DBAccess
-from . import spiLib
-from . import spiLibCreateTable
+import DBConnect
+import DBAccess
+import spiLib
+import spiLibCreateTable
 
 #parametre NACE1 ou NACE2
 NaceInput      	=  sys.argv[1]

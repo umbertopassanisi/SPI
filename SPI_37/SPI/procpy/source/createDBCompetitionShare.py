@@ -1,10 +1,10 @@
 import sys
 from pprint import pprint
 
-from . import DBConnect
-from . import DBAccess
-from . import spiLib
-from . import spiLibCreateTable
+import DBConnect
+import DBAccess
+import spiLib
+import spiLibCreateTable
 
 nomenclature = sys.argv[1]
 indicator = sys.argv[2]

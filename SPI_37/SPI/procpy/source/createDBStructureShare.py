@@ -3,7 +3,6 @@ import sys
 from . import DBConnect
 from . import DBAccess
 from . import spiLibCreateTable
-from pprint import pprint
 
 indicator = sys.argv[1]
 nomenclature = sys.argv[2]

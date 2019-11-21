@@ -246,8 +246,8 @@ def traitementFichierTXT(indicatorEurostatDenominator, indicatorEurostatNumerato
                 dicNaceCheck[nace] = nace
                 country = dicNation[geo]                    
                 timeSerie = geoTime[1:]
-                
-                if indicator == indicatorEurostatNumerator and dicNace.has_key(nace) and unit == unitNumerator:
+
+                if indicator == indicatorEurostatNumerator and nace in dicNace and unit == unitNumerator:
                     vector = spiLib.defVectorYears(timeSerie, startYear, endYear)
                     minimumYearWithActualData = spiLib.findMinimumYearWithActualData(timeSerie,int(startYear),minimumYearWithActualData)
                     dicIndicatorNumerator = spiLib.defDicIndicator(country,nace,vector,dicIndicatorNumerator)
@@ -292,8 +292,8 @@ def traitementFichierTXT(indicatorEurostatDenominator, indicatorEurostatNumerato
                 dicNaceCheck[nace] = nace
                 country = dicNation[geo]                    
                 timeSerie = geoTime[1:]
-                
-                if indicator == indicatorEurostatDenominator and dicNace.has_key(nace) and unit == unitDenominator and sector == 'S1' :
+
+                if indicator == indicatorEurostatDenominator and nace in dicNace and unit == unitDenominator and sector == 'S1':
                     vector = spiLib.defVectorYears(timeSerie, startYear, endYear)
                     dicIndicatorDenominator = spiLib.defDicIndicator(country,nace,vector,dicIndicatorDenominator)
             except :

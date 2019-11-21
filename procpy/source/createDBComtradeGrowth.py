@@ -1,7 +1,7 @@
 import sys
 import glob
 import re
-import exceptions
+
 import cx_Oracle
 import DBConnect
 import DBAccess
@@ -208,7 +208,7 @@ def traitementFichierTXT(indicatorInput,indicatorInputEurostat,nomenclature,comp
 				#dans la liste definie dans la table oracle ou uniquement sur la longueur (4)
 				#la regle est si nace1 alors on prend la liste
 				#si nace2 et nama on prend la liste sur sbs on teste sur la longueur max 4
-				if	indicator == indicatorEurostat and (unit == Unit) and (sector == 'S1') and dicNace.has_key(nace):
+				if indicator == indicatorEurostat and (unit == Unit) and (sector == 'S1') and dicNace.has_key(nace):
 					dicNaceCheck[nace]	=	nace #on remplit le dic pour faire un check si autant de nace que dans la table SPI											
 					vector 				= 	spiLib.defVectorYears(timeSerie, startYear, endYear)#traitement de la serie Eurostat					
 					dicStartValue		=	spiLib.defDicStartValue(timeSerie,country,nace,indicator,dicStartValue,endYear)	

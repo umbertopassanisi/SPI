@@ -1,6 +1,6 @@
 import 	re
 import	cx_Oracle
-from . import DBConnect
+import 	DBConnect
 
 cursor 			= 	DBConnect.connection.cursor()
 nbrcommit		=	0
